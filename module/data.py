@@ -13,25 +13,42 @@ def pad(x, max_len=64600):
     return padded_x
 
 class AudioDataset(Dataset):
-    def __init__(self, root_dir, cut=64600):
+    def __init__(self, root_dir, cut=64600, typ=None):
         self.root_dir = root_dir
         self.cut = cut
+        self.typ = typ
+        if self.typ:
+            self.root_dir = os.path.join(self.root_dir, typ)
         self.samples = []
         self._load_samples()
 
     def _load_samples(self):
-        classes = ['Real', 'Fake']
+        try:
+            classes = ['Real', 'Fake']
 
-        for idx, class_name in enumerate(classes):
-            class_dir = os.path.join(self.root_dir, class_name)
-            for filename in os.listdir(class_dir):
-                file_path = os.path.join(class_dir, filename)
-                if file_path[-3:] == "wav":
-                    self.samples.append((file_path, idx))
-                elif file_path[:-3] == "mp3":
-                    self.samples.append((file_path, idx))
-                else:
-                    pass
+            for idx, class_name in enumerate(classes):
+                class_dir = os.path.join(self.root_dir, class_name)
+                for filename in os.listdir(class_dir):
+                    file_path = os.path.join(class_dir, filename)
+                    if file_path[-3:] == "wav":
+                        self.samples.append((file_path, idx))
+                    elif file_path[:-3] == "mp3":
+                        self.samples.append((file_path, idx))
+                    else:
+                        pass
+        except:
+            classes = ['real', 'fake']
+
+            for idx, class_name in enumerate(classes):
+                class_dir = os.path.join(self.root_dir, class_name)
+                for filename in os.listdir(class_dir):
+                    file_path = os.path.join(class_dir, filename)
+                    if file_path[-3:] == "wav":
+                        self.samples.append((file_path, idx))
+                    elif file_path[:-3] == "mp3":
+                        self.samples.append((file_path, idx))
+                    else:
+                        pass
 
     def __len__(self):
         return len(self.samples)

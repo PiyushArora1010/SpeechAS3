@@ -598,6 +598,8 @@ class Model(nn.Module):
 def load_model(device, path2='check/LA_model.pth', path='check/xlsr2_300m.pt'):
     model = Model(path, device)
     stateDic = torch.load(path2)
+    stateDic['args'] = 'args'
+    stateDic['cfg'] = 'cfg'
     del stateDic['args'], stateDic['cfg']
     model.load_state_dict(stateDic)
     model = model.to(device)
