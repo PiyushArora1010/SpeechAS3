@@ -594,3 +594,11 @@ class Model(nn.Module):
         output = self.out_layer(last_hidden)
         
         return output
+    
+def load_model(device, path2='check/LA_model.pth', path='check/xlsr2_300m.pt'):
+    model = Model(path, device)
+    stateDic = torch.load(path2)
+    del stateDic['args'], stateDic['cfg']
+    model.load_state_dict(stateDic)
+    model = model.to(device)
+    return model
