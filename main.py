@@ -1,8 +1,12 @@
 import torch
-from torchaudio.pipelines import WAV2VEC2_XLSR_300M
+from module.model import Model
 
-# Load the model
-model = WAV2VEC2_XLSR_300M.get_model()
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-state_dic = torch.load("check/Best_LA_model_for_DF.pth")
-print(state_dic.keys())
+path = 'check/xlsr2_300m.pt'
+
+model = Model(path, device)
+
+stateDic = torch.load('check/LA_model.pth')
+del stateDic['args'], stateDic['cfg']
+model.load_state_dict(stateDic)
