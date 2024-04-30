@@ -17,7 +17,7 @@ Required Packages
 
 * The model checkpoints should be present in a folder named `check` in the root directory.
 * The datasets should be present as follows:
-    - The FOR dataset should be present in a folder named `for=2seconds` in the root directory.
+    - The FOR dataset should be present in a folder named `for-2seconds` in the root directory.
     - The Custom dataset can be simply downloaded in the root directory
 
 ### Instructions to run
