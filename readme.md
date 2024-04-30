@@ -1,6 +1,6 @@
 # [Speech Understanding] Programming Assignment 3
 
-This README document provides a comprehensive explanation of the provided code
+This README document provides a comprehensive explanation of the provided code. Code Link: `https://github.com/PiyushArora1010/SpeechAS3.git`
 
 #### Environment requirements
 
